@@ -1,0 +1,48 @@
+import multiprocessing
+import time
+import random
+
+def writer(id, write_lock, shared_resource):
+    while True:
+        with write_lock:
+            print(f"Writer-{id} started writing")
+            shared_resource.value += 1
+            time.sleep(1)
+            print(f"Writer-{id} finished writing. Shared Resource: {shared_resource.value}")
+        time.sleep(1)
+
+def reader(id, write_lock, shared_resource):
+    while True:
+        time.sleep(random.randint(1, 3))
+        if write_lock.acquire(block=False):
+            try:
+                print(f"Reader-{id} is reading the shared resource: {shared_resource.value}")
+                time.sleep(1)
+            finally:
+                write_lock.release()
+        else:
+            print(f"Reader-{id} is waiting as Writer is accessing the resource.")
+            time.sleep(1)
+
+def process_manager(num_readers, num_writers):
+    write_lock = multiprocessing.Lock()
+    shared_resource = multiprocessing.Value('i', 0)
+    processes = []
+
+    for i in range(num_writers):
+        p = multiprocessing.Process(target=writer, args=(i + 1, write_lock, shared_resource))
+        processes.append(p)
+        p.start()
+
+    for i in range(num_readers):
+        p = multiprocessing.Process(target=reader, args=(i + 1, write_lock, shared_resource))
+        processes.append(p)
+        p.start()
+
+    for p in processes:
+        p.join()
+
+if __name__ == "__main__":
+    num_readers = 3
+    num_writers = 1
+    process_manager(num_readers, num_writers)
