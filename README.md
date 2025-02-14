@@ -3,9 +3,9 @@ This Repository contains the practical assignments that I was working on during 
 ## First assignment
 1. Producer-Consumer Problem with Threads
 Write a program that implements the producer-consumer algorithm using threads. The program should meet the following conditions:
- *    One producer
- *    Five consumers
- *    Buffer size of 30
+       *    One producer
+       *    Five consumers
+       *    Buffer size of 30
       The program should handle various scenarios based on sleep times:
  * Empty buffer: Consumer thread waits for production.
  * Full buffer: Producer thread waits for consumption.
