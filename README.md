@@ -25,3 +25,19 @@ The solution must cover all three cases: stopping production, stopping consumpti
 
 2. The Readers-Writers problem can also be implemented using processes and locks. However, instead of threads, processes must be used.
 Reader and writer priorities must be considered.
+
+## Bonus Project
+The **Operating Systems course project**, which will be considered as a bonus, is as follows:  
+
+Although this project involves implementing two algorithms—**Readers-Writers** and **Dining Philosophers**—it is considered a **single task**. Therefore, only the work of those who complete **all three parts** of the project will be evaluated.  
+
+#### **1 & 2 - Readers-Writers Problem**  
+This algorithm includes two scenarios:  
+- **First scenario**: This follows exactly the implementation from the slides, where **readers have priority**.  
+- **Second scenario**: **Writers have priority**, meaning if a writer requests access to the critical section, it should **not** have to wait for all readers to finish before proceeding immediately.  
+
+#### **3 - Dining Philosophers Problem**  
+In this scenario, there are five philosophers who must complete their tasks **without deadlock**.  
+
+#### **Bonus:**  
+Try to prevent **starvation** in your implementation.
